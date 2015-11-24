@@ -6,7 +6,7 @@ set cut_paste_input [stack 0]
 version 9.0 v6
 push $cut_paste_input
 Group {
-name FrameBlendMerge8
+name FrameBlendMerge
 help http://richardfrazer.com/tools-tutorials/auto-cleanplate-for-nuke/
 knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n#print n\['customframerange'].getValue()\nif k.name()==\"customframerange\":\n    n\['framerangestart'].setEnabled((n\['customframerange'].getValue())!=0)\n    n\['framerangeend'].setEnabled(n\['customframerange'].getValue()!=0)\n    n\['numberframes'].setEnabled((1-n\['customframerange'].getValue())!=0)\nif k.name()==\"invertalpha\":\n    n\['defaultinvert'].setValue((n\['invertalpha'].getValue())!=0)\nif k.name()==\"method\":\n    n\['vectordetail'].setVisible((n\['method'].getValue())!=0)\n    n\['smooth'].setVisible(n\['method'].getValue()!=0)\n    if n\['method'].getValue()==0:\n        n\['invertalpha'].setValue(n\['defaultinvert'].getValue())\n    if n\['method'].getValue()==1:\n        n\['invertalpha'].setValue(0)\n"
 selected true
