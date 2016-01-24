@@ -2,16 +2,15 @@
 # www.richardfrazer.com/tools-tutorials/frameblendmerge/
 
 Group {
- inputs 2
  name FrameBlendMerge
  help http://richardfrazer.com/tools-tutorials/frameblendmerge/
  knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n#print n\['customframerange'].getValue()\nif k.name()==\"customframerange\":\n    n\['framerangestart'].setEnabled((n\['customframerange'].getValue())!=0)\n    n\['framerangeend'].setEnabled(n\['customframerange'].getValue()!=0)\n    n\['numberframes'].setEnabled((1-n\['customframerange'].getValue())!=0)\nif k.name()==\"invertalpha\":\n    n\['defaultinvert'].setValue((n\['invertalpha'].getValue())!=0)\nif k.name()==\"method\":\n    n\['vectordetail'].setVisible((n\['method'].getValue())!=0)\n    n\['smooth'].setVisible(n\['method'].getValue()!=0)\n    if n\['method'].getValue()==0:\n        n\['invertalpha'].setValue(n\['defaultinvert'].getValue())\n    if n\['method'].getValue()==1:\n        n\['invertalpha'].setValue(0)\n"
  selected true
- xpos -440
- ypos 23
+ xpos 174
+ ypos -54
  addUserKnob {20 User}
  addUserKnob {4 operation M {atop average color-burn color-dodge conjoint-over copy difference disjoint-over divide exclusion from geometric hard-light hypot in mask matte max min minus multiply out over overlay plus screen soft-light stencil under xor}}
- operation max
+ operation min
  addUserKnob {26 ""}
  addUserKnob {26 text2 l "" +STARTLINE T "Frame blend\n"}
  addUserKnob {3 framerangestart l "Frame Range"}
@@ -35,49 +34,49 @@ Group {
   xpos -871
   ypos 495
  }
-set N38c5bff0 [stack 0]
+set N3e0cf520 [stack 0]
  FrameHold {
   first_frame 1009
   name FrameHoldMerge1009
   xpos -200
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1008
   name FrameHoldMerge1008
   xpos -300
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1007
   name FrameHoldMerge1007
   xpos -400
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1006
   name FrameHoldMerge1006
   xpos -500
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1005
   name FrameHoldMerge1005
   xpos -600
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1004
   name FrameHoldMerge1004
   xpos -700
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1003
   name FrameHoldMerge1003
@@ -91,7 +90,7 @@ push $N38c5bff0
   ypos 579
   number 1
  }
-push $N38c5bff0
+push $N3e0cf520
  Dot {
   name Dot2
   xpos -1202
@@ -106,7 +105,7 @@ push $N38c5bff0
   red black
   green black
   blue black
-  alpha black
+  alpha white
   name Shuffle1
   xpos -1236
   ypos 638
@@ -123,14 +122,15 @@ push $N38c5bff0
   xpos -1315
   ypos 703
  }
-push $N38c5bff0
+set N3edeeeb0 [stack 0]
+push $N3e0cf520
  FrameHold {
   first_frame 1002
   name FrameHoldMerge1002
   xpos -900
   ypos 600
  }
-push $N38c5bff0
+push $N3e0cf520
  FrameHold {
   first_frame 1001
   name FrameHoldMerge1001
@@ -139,7 +139,7 @@ push $N38c5bff0
  }
  Merge2 {
   inputs 9+1
-  operation max
+  operation min
   name MergeFrames
   selected true
   xpos -900
@@ -150,4 +150,12 @@ push $N38c5bff0
   xpos -900
   ypos 817
  }
+push $N3edeeeb0
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos -1341
+  ypos 942
+ }
 end_group
+
