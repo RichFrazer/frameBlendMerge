@@ -4,23 +4,24 @@
 Group {
  name FrameBlendMerge
  help http://richardfrazer.com/tools-tutorials/frameblendmerge/
- knobChanged "nuke.thisNode().begin()\n\nt = nuke.thisNode()\n\ntname = t.name()\n\n#print ('tname: ' + tname)\n\n\n\nframestart = int(t\['framerangestart'].value())\nframeend = int(t\['framerangeend'].value())\n\np = -1000\n\nfor d in nuke.allNodes():\n    if (d.Class() == 'FrameHold') or (d.Class() == 'Merge2'):\n         nuke.delete(d) \n    #else:\n    #     print (\"Ignore this\" + d.Class() )\n\n\nfor x in xrange(framestart, frameend):\n    n = nuke.nodes.FrameHold()            \n    n\['name'].setValue( 'FrameHoldMerge' +str(x) )\n    n\['first_frame'].setValue( x )\n    n.setXYpos( p, 600 )\n    n.setInput(0, nuke.toNode( 'inputDot' ))\n    p = p + 100\n\nnewMerge = nuke.nodes.Merge2()\nnewMerge\['name'].setValue( 'MergeFrames' )\nnewMerge.setXYpos( -900, 700 )  \n\ni = 0\n\nfor x in xrange(framestart, frameend):\n    nname = 'FrameHoldMerge' +str(x)\n    n = nuke.toNode( nname )\n    if(i==2):\n        i=i+1\n    #print(\"connecting input \" + str(i))\n    newMerge.setInput(i, nuke.toNode( nname ))\n    i=i+1\n\nnewMerge.setInput(2, nuke.toNode( \"mask_dot\" ))\n\ntoperation = t\['operation'].value()\nnewMerge\['operation'].setValue( toperation )\n\no = nuke.toNode( 'OutputBlend' )\no.setInput(0, newMerge)\n\n\ntLabel = str(framestart) + \"-\" + str(frameend)\n\nt\['label'].setValue(tLabel)\n\n\nnuke.thisNode().end()\n\n\n\n\n"
- label 1000-1010
+ knobChanged "nuke.thisNode().begin()\n\nt = nuke.thisNode()\n\ntname = t.name()\n\n#print ('tname: ' + tname)\n\n\n\nframestart = int(t\['framerangestart'].value())\nframeend = int(t\['framerangeend'].value())\n\np = -1000\n\nfor d in nuke.allNodes():\n    if (d.Class() == 'FrameHold') or (d.Class() == 'Merge2'):\n         nuke.delete(d) \n    #else:\n    #     print (\"Ignore this\" + d.Class() )\n\n\nfor x in xrange(framestart, frameend):\n    n = nuke.nodes.FrameHold()            \n    n\['name'].setValue( 'FrameHoldMerge' +str(x) )\n    n\['first_frame'].setValue( x )\n    n\['first_frame'].setExpression( str(x) + \" + parent.offset\" )\n    n.setXYpos( p, 600 )\n    n.setInput(0, nuke.toNode( 'inputDot' ))\n    p = p + 100\n\nnewMerge = nuke.nodes.Merge2()\nnewMerge\['name'].setValue( 'MergeFrames' )\nnewMerge.setXYpos( -900, 700 )  \n\ni = 0\n\nfor x in xrange(framestart, frameend):\n    nname = 'FrameHoldMerge' +str(x)\n    n = nuke.toNode( nname )\n    if(i==2):\n        i=i+1\n    #print(\"connecting input \" + str(i))\n    newMerge.setInput(i, nuke.toNode( nname ))\n    i=i+1\n\nnewMerge.setInput(2, nuke.toNode( \"mask_dot\" ))\n\ntoperation = t\['operation'].value()\nnewMerge\['operation'].setValue( toperation )\n\no = nuke.toNode( 'OutputBlend' )\no.setInput(0, newMerge)\n\n\ntLabel = str(framestart) + \"-\" + str(frameend)\n\nt\['label'].setValue(tLabel)\n\n\nnuke.thisNode().end()\n\n\n\n\n"
+ label 1001-1010
  selected true
- xpos -1344
- ypos -1318
+ xpos -137
+ ypos -251
  addUserKnob {20 User}
  addUserKnob {4 operation M {atop average color-burn color-dodge conjoint-over copy difference disjoint-over divide exclusion from geometric hard-light hypot in mask matte max min minus multiply out over overlay plus screen soft-light stencil under xor}}
- operation max
+ operation min
  addUserKnob {26 ""}
  addUserKnob {26 text2 l "" +STARTLINE T "Frame blend\n"}
  addUserKnob {3 framerangestart l "Frame Range"}
- framerangestart 1000
+ framerangestart 1001
  addUserKnob {3 framerangeend l "" -STARTLINE}
  framerangeend 1010
  addUserKnob {22 InputRange l "Input Range" -STARTLINE T "n = nuke.thisNode()\nf = n.firstFrame()\nl = n.lastFrame() \n\nn\['framerangestart'].setValue(f)\nn\['framerangeend'].setValue(l)"}
+ addUserKnob {3 offset}
  addUserKnob {26 ""}
- addUserKnob {26 textabout l "" +STARTLINE T "<b>FrameBlendMerge</b> v1.6 by Richard Frazer<br>\n<a href=\"www.richardfrazer.com/tools-tutorials/frameblendmerge/\n\">www.richardfrazer.com/tools-tutorials/frameblendmerge/</a>\n"}
+ addUserKnob {26 textabout l "" +STARTLINE T "<b>FrameBlendMerge</b> v1.7 by Richard Frazer<br>\n<a href=\"www.richardfrazer.com/tools-tutorials/frameblendmerge/\n\">www.richardfrazer.com/tools-tutorials/frameblendmerge/</a>\n"}
 }
  Input {
   inputs 0
@@ -33,59 +34,52 @@ Group {
   xpos -871
   ypos 495
  }
-set N8276970 [stack 0]
+set N10525d00 [stack 0]
  FrameHold {
-  first_frame 1009
+  first_frame {{"1009 + parent.offset"}}
   name FrameHoldMerge1009
-  xpos -100
-  ypos 600
- }
-push $N8276970
- FrameHold {
-  first_frame 1008
-  name FrameHoldMerge1008
   xpos -200
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1007
-  name FrameHoldMerge1007
+  first_frame {{"1008 + parent.offset"}}
+  name FrameHoldMerge1008
   xpos -300
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1006
-  name FrameHoldMerge1006
+  first_frame {{"1007 + parent.offset"}}
+  name FrameHoldMerge1007
   xpos -400
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1005
-  name FrameHoldMerge1005
+  first_frame {{"1006 + parent.offset"}}
+  name FrameHoldMerge1006
   xpos -500
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1004
-  name FrameHoldMerge1004
+  first_frame {{"1005 + parent.offset"}}
+  name FrameHoldMerge1005
   xpos -600
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1003
-  name FrameHoldMerge1003
+  first_frame {{"1004 + parent.offset"}}
+  name FrameHoldMerge1004
   xpos -700
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1002
-  name FrameHoldMerge1002
+  first_frame {{"1003 + parent.offset"}}
+  name FrameHoldMerge1003
   xpos -800
   ypos 600
  }
@@ -96,7 +90,7 @@ push $N8276970
   ypos 579
   number 1
  }
-push $N8276970
+push $N10525d00
  Dot {
   name Dot2
   xpos -1202
@@ -118,33 +112,33 @@ push $N8276970
  }
  Switch {
   inputs 2
-  which {{"\[exists parent.input1]" i}}
+  which {{"\[exists parent.input1]"}}
   name Switch3
   xpos -1349
-  ypos 647
+  ypos 648
  }
  Dot {
   name mask_dot
   xpos -1315
   ypos 703
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1001
-  name FrameHoldMerge1001
+  first_frame {{"1002 + parent.offset"}}
+  name FrameHoldMerge1002
   xpos -900
   ypos 600
  }
-push $N8276970
+push $N10525d00
  FrameHold {
-  first_frame 1000
-  name FrameHoldMerge1000
+  first_frame {{"1001 + parent.offset"}}
+  name FrameHoldMerge1001
   xpos -1000
   ypos 600
  }
  Merge2 {
-  inputs 10+1
-  operation max
+  inputs 9+1
+  operation min
   name MergeFrames
   xpos -900
   ypos 700
@@ -155,6 +149,7 @@ push $N8276970
   ypos 817
  }
 end_group
+
 
 
 
