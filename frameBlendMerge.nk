@@ -2,26 +2,25 @@
 # www.richardfrazer.com/tools-tutorials/frameblendmerge/
 
 Group {
- name FrameBlendMerge
- help http://richardfrazer.com/tools-tutorials/frameblendmerge/
- knobChanged "nuke.thisNode().begin()\n\nt = nuke.thisNode()\n\ntname = t.name()\n\n#print ('tname: ' + tname)\n\n\n\nframestart = int(t\['framerangestart'].value())\nframeend = int(t\['framerangeend'].value())\n\np = -1000\n\nfor d in nuke.allNodes():\n    if (d.Class() == 'FrameHold') or (d.Class() == 'Merge2'):\n         nuke.delete(d) \n    #else:\n    #     print (\"Ignore this\" + d.Class() )\n\n\nfor x in xrange(framestart, frameend):\n    n = nuke.nodes.FrameHold()            \n    n\['name'].setValue( 'FrameHoldMerge' +str(x) )\n    n\['first_frame'].setValue( x )\n    n\['first_frame'].setExpression( str(x) + \" + parent.offset\" )\n    n.setXYpos( p, 600 )\n    n.setInput(0, nuke.toNode( 'inputDot' ))\n    p = p + 100\n\nnewMerge = nuke.nodes.Merge2()\nnewMerge\['name'].setValue( 'MergeFrames' )\nnewMerge.setXYpos( -900, 700 )  \n\ni = 0\n\nfor x in xrange(framestart, frameend):\n    nname = 'FrameHoldMerge' +str(x)\n    n = nuke.toNode( nname )\n    if(i==2):\n        i=i+1\n    #print(\"connecting input \" + str(i))\n    newMerge.setInput(i, nuke.toNode( nname ))\n    i=i+1\n\nnewMerge.setInput(2, nuke.toNode( \"mask_dot\" ))\n\ntoperation = t\['operation'].value()\nnewMerge\['operation'].setValue( toperation )\n\no = nuke.toNode( 'OutputBlend' )\no.setInput(0, newMerge)\n\n\ntLabel = str(framestart) + \"-\" + str(frameend)\n\nt\['label'].setValue(tLabel)\n\n\nnuke.thisNode().end()\n\n\n\n\n"
- label 1001-1010
- selected true
- xpos -137
- ypos -251
- addUserKnob {20 User}
- addUserKnob {4 operation M {atop average color-burn color-dodge conjoint-over copy difference disjoint-over divide exclusion from geometric hard-light hypot in mask matte max min minus multiply out over overlay plus screen soft-light stencil under xor}}
- operation min
- addUserKnob {26 ""}
- addUserKnob {26 text2 l "" +STARTLINE T "Frame blend\n"}
- addUserKnob {3 framerangestart l "Frame Range"}
- framerangestart 1001
- addUserKnob {3 framerangeend l "" -STARTLINE}
- framerangeend 1010
- addUserKnob {22 InputRange l "Input Range" -STARTLINE T "n = nuke.thisNode()\nf = n.firstFrame()\nl = n.lastFrame() \n\nn\['framerangestart'].setValue(f)\nn\['framerangeend'].setValue(l)"}
- addUserKnob {3 offset}
- addUserKnob {26 ""}
- addUserKnob {26 textabout l "" +STARTLINE T "<b>FrameBlendMerge</b> v1.7 by Richard Frazer<br>\n<a href=\"www.richardfrazer.com/tools-tutorials/frameblendmerge/\n\">www.richardfrazer.com/tools-tutorials/frameblendmerge/</a>\n"}
+name FrameBlendMerge
+help http://richardfrazer.com/tools-tutorials/frameblendmerge/
+knobChanged "nuke.thisNode().begin()\n\nt = nuke.thisNode()\n\ntname = t.name()\n\n#print ('tname: ' + tname)\n\n\n\nframestart = int(t\['framerangestart'].value())\nframeend = int(t\['framerangeend'].value())\n\np = -1000\n\nfor d in nuke.allNodes():\n    if (d.Class() == 'FrameHold') or (d.Class() == 'Merge2'):\n         nuke.delete(d) \n    #else:\n    #     print (\"Ignore this\" + d.Class() )\n\n\nfor x in range(framestart, frameend):\n    n = nuke.nodes.FrameHold()            \n    n\['name'].setValue( 'FrameHoldMerge' +str(x) )\n    n\['first_frame'].setValue( x )\n    n.setXYpos( p, 600 )\n    n.setInput(0, nuke.toNode( 'inputDot' ))\n    p = p + 100\n\nnewMerge = nuke.nodes.Merge2()\nnewMerge\['name'].setValue( 'MergeFrames' )\nnewMerge.setXYpos( -900, 700 )  \n\ni = 0\n\nfor x in range(framestart, frameend):\n    nname = 'FrameHoldMerge' +str(x)\n    n = nuke.toNode( nname )\n    if(i==2):\n        i=i+1\n    #print(\"connecting input \" + str(i))\n    newMerge.setInput(i, nuke.toNode( nname ))\n    i=i+1\n\nnewMerge.setInput(2, nuke.toNode( \"mask_dot\" ))\n\ntoperation = t\['operation'].value()\nnewMerge\['operation'].setValue( toperation )\n\no = nuke.toNode( 'OutputBlend' )\no.setInput(0, newMerge)\n\n\ntLabel = str(framestart) + \"-\" + str(frameend)\n\nt\['label'].setValue(tLabel)\n\n\nnuke.thisNode().end()\n\n\n\n\n"
+label 1000-1010
+selected true
+xpos -601
+ypos 125
+addUserKnob {20 User}
+addUserKnob {4 operation M {atop average color-burn color-dodge conjoint-over copy difference disjoint-over divide exclusion from geometric hard-light hypot in mask matte max min minus multiply out over overlay plus screen soft-light stencil under xor}}
+operation max
+addUserKnob {26 ""}
+addUserKnob {26 text2 l "" +STARTLINE T "Frame blend\n"}
+addUserKnob {3 framerangestart l "Frame Range"}
+framerangestart 1000
+addUserKnob {3 framerangeend l "" -STARTLINE}
+framerangeend 1010
+addUserKnob {22 InputRange l "Input Range" -STARTLINE T "n = nuke.thisNode()\nf = n.firstFrame()\nl = n.lastFrame() \n\nn\['framerangestart'].setValue(f)\nn\['framerangeend'].setValue(l)"}
+addUserKnob {26 ""}
+addUserKnob {26 textabout l "" +STARTLINE T "<b>FrameBlendMerge</b> v1.7 by Richard Frazer<br>\n<a href=\"www.richardfrazer.com/tools-tutorials/frameblendmerge/\n\">www.richardfrazer.com/tools-tutorials/frameblendmerge/</a>\n"}
 }
  Input {
   inputs 0
