@@ -22,133 +22,60 @@ addUserKnob {22 InputRange l "Input Range" -STARTLINE T "n = nuke.thisNode()\nf 
 addUserKnob {26 ""}
 addUserKnob {26 textabout l "" +STARTLINE T "<b>FrameBlendMerge</b> v1.7 by Richard Frazer<br>\n<a href=\"www.richardfrazer.com/tools-tutorials/frameblendmerge/\n\">www.richardfrazer.com/tools-tutorials/frameblendmerge/</a>\n"}
 }
- Input {
-  inputs 0
-  name Input
-  xpos -905
-  ypos 395
- }
- Dot {
-  name inputDot
-  xpos -871
-  ypos 495
- }
-set N10525d00 [stack 0]
- FrameHold {
-  first_frame {{"1009 + parent.offset"}}
-  name FrameHoldMerge1009
-  xpos -200
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1008 + parent.offset"}}
-  name FrameHoldMerge1008
-  xpos -300
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1007 + parent.offset"}}
-  name FrameHoldMerge1007
-  xpos -400
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1006 + parent.offset"}}
-  name FrameHoldMerge1006
-  xpos -500
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1005 + parent.offset"}}
-  name FrameHoldMerge1005
-  xpos -600
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1004 + parent.offset"}}
-  name FrameHoldMerge1004
-  xpos -700
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1003 + parent.offset"}}
-  name FrameHoldMerge1003
-  xpos -800
-  ypos 600
- }
- Input {
-  inputs 0
-  name Mask
-  xpos -1349
-  ypos 579
-  number 1
- }
-push $N10525d00
- Dot {
-  name Dot2
-  xpos -1202
-  ypos 572
- }
- Remove {
-  name Remove1
-  xpos -1236
-  ypos 604
- }
- Shuffle {
-  red black
-  green black
-  blue black
-  alpha white
-  name Shuffle1
-  xpos -1236
-  ypos 638
- }
- Switch {
-  inputs 2
-  which {{"\[exists parent.input1]"}}
-  name Switch3
-  xpos -1349
-  ypos 648
- }
- Dot {
-  name mask_dot
-  xpos -1315
-  ypos 703
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1002 + parent.offset"}}
-  name FrameHoldMerge1002
-  xpos -900
-  ypos 600
- }
-push $N10525d00
- FrameHold {
-  first_frame {{"1001 + parent.offset"}}
-  name FrameHoldMerge1001
-  xpos -1000
-  ypos 600
- }
- Merge2 {
-  inputs 9+1
-  operation min
-  name MergeFrames
-  xpos -900
-  ypos 700
- }
- Output {
-  name OutputBlend
-  xpos -900
-  ypos 817
- }
-end_group
-
-
-
-
+Input {
+inputs 0
+name Mask
+xpos -1349
+ypos 579
+number 1
+}
+Input {
+inputs 0
+name Input
+xpos -905
+ypos 395
+}
+Dot {
+name inputDot
+xpos -871
+ypos 495
+}
+set N242f8b90 [stack 0]
+Dot {
+name Dot2
+xpos -1202
+ypos 572
+}
+Remove {
+name Remove1
+xpos -1236
+ypos 604
+}
+Shuffle {
+red black
+green black
+blue black
+alpha white
+name Shuffle1
+xpos -1236
+ypos 638
+}
+Switch {
+inputs 2
+which {{"\[exists parent.input1]" i}}
+name Switch3
+xpos -1349
+ypos 647
+}
+Dot {
+name mask_dot
+xpos -1315
+ypos 703
+}
+push $N242f8b90
+Output {
+name OutputBlend
+xpos -900
+ypos 817
+}
+end
